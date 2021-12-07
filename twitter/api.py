@@ -748,7 +748,8 @@ class Api(object):
                         count=None,
                         include_rts=True,
                         trim_user=False,
-                        exclude_replies=False):
+                        exclude_replies=False,
+                        return_json=False):
         """Fetch the sequence of public Status messages for a single user.
 
         The twitter.Api instance must be authenticated if the user is private.
@@ -811,7 +812,10 @@ class Api(object):
         resp = self._RequestUrl(url, 'GET', data=parameters)
         data = self._ParseAndCheckTwitter(resp.content.decode('utf-8'))
 
-        return [Status.NewFromJsonDict(x) for x in data]
+        if return_json:
+            return data
+        else:
+            return [Status.NewFromJsonDict(x) for x in data]
 
     def GetStatus(self,
                   status_id,
