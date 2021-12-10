@@ -154,6 +154,7 @@ class Api(object):
                  request_headers=None,
                  cache=DEFAULT_CACHE,
                  base_url=None,
+                 base_url_v2=None,
                  stream_url=None,
                  upload_url=None,
                  chunk_size=1024 * 1024,
@@ -260,6 +261,7 @@ class Api(object):
         self.cert_ssl = cert_ssl
 
         self.base_url = base_url or 'https://api.twitter.com/1.1'
+        self.base_url_v2 = base_url_v2 or 'https://api.twitter.com/2'
         self.stream_url = stream_url or 'https://stream.twitter.com/1.1'
         self.upload_url = upload_url or 'https://upload.twitter.com/1.1'
 
@@ -1663,6 +1665,50 @@ class Api(object):
             trim_user=trim_user,
             exclude_replies=True,
             include_rts=True)
+
+    def GetConversation(self,
+                        conversation_id,
+                        trim_user=True,
+                        cursor=None,
+                        return_json=True):
+        if not return_json:
+            raise RuntimeError('Not implemented')
+
+        url = '%s/timeline/conversation/%s.json' % (self.base_url_v2, conversation_id)
+
+        parameters = {
+            'trim_user': enf_type('trim_user', bool, trim_user),
+        }
+        if cursor:
+            parameters['cursor'] = cursor
+
+        resp = self._RequestUrl(url, 'GET', data=parameters)
+        data = self._ParseAndCheckTwitter(resp.content.decode('utf-8'))
+        result = {'tweets': data['globalObjects']['tweets']}
+
+        for sid in result['tweets']:
+            # set 'text' field
+            if 'text' not in result['tweets'][sid] and \
+             'full_text' in result['tweets'][sid] and \
+             'display_text_range' in result['tweets'][sid]:
+                result['tweets'][sid]['text'] = result['tweets'][sid]['full_text'][result['tweets'][sid][
+                    'display_text_range'][0]:result['tweets'][sid]['display_text_range'][1]
+                ]
+            # add int values for *_str fields
+            for prop in list(result['tweets'][sid]):
+                if prop.endswith('_str') and prop[:-4] not in result['tweets'][sid]:
+                    result['tweets'][sid][prop[:-4]] = int(result['tweets'][sid][prop])
+
+
+        # get cursor for next page of comments
+        for instr in data['timeline']['instructions']:
+            if 'addEntries' in instr:
+                if next_cursor := instr['addEntries']['entries'][-1].\
+                    get('content',{}).get('operation',{}).get('cursor',{}).get('value'):
+                    result['next_cursor'] = next_cursor
+                break
+
+        return result
 
     def GetReplies(self,
                    since_id=None,
