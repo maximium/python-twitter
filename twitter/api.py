@@ -5158,6 +5158,8 @@ class Api(object):
         """
         # Twitter errors are relatively unlikely, so it is faster
         # to check first, rather than try and catch the exception
+        if not data:
+            raise TwitterError('Empty response')
         if 'error' in data:
             raise TwitterError(data['error'])
         if 'errors' in data:
