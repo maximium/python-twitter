@@ -751,6 +751,7 @@ class Api(object):
                         include_rts=True,
                         trim_user=False,
                         exclude_replies=False,
+                        media_only=False,
                         return_json=False):
         """Fetch the sequence of public Status messages for a single user.
 
@@ -810,6 +811,7 @@ class Api(object):
         parameters['include_rts'] = enf_type('include_rts', bool, include_rts)
         parameters['trim_user'] = enf_type('trim_user', bool, trim_user)
         parameters['exclude_replies'] = enf_type('exclude_replies', bool, exclude_replies)
+        parameters['media_only'] = enf_type('media_only', int, media_only)
 
         resp = self._RequestUrl(url, 'GET', data=parameters)
         data = self._ParseAndCheckTwitter(resp.content.decode('utf-8'))
