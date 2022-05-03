@@ -49,6 +49,7 @@ from twitter import (
     Category,
     DirectMessage,
     List,
+    Place,
     Status,
     Trend,
     User,
@@ -120,7 +121,6 @@ class Api(object):
       There are many other methods, including:
 
         >>> api.PostUpdates(status)
-        >>> api.PostDirectMessage(user, text)
         >>> api.GetUser(user)
         >>> api.GetReplies()
         >>> api.GetUserTimeline(user)
@@ -162,8 +162,10 @@ class Api(object):
                  debugHTTP=False,
                  timeout=None,
                  sleep_on_rate_limit=False,
-                 tweet_mode='extended',
-                 proxies=None):
+                 tweet_mode='compat',
+                 proxies=None,
+                 verify_ssl=None,
+                 cert_ssl=None):
         """Instantiate a new twitter.Api object.
 
         Args:
@@ -217,6 +219,13 @@ class Api(object):
           proxies (dict, optional):
             A dictionary of proxies for the request to pass through, if not specified
             allows requests lib to use environmental variables for proxy if any.
+          verify_ssl (optional):
+            Either a boolean, in which case it controls whether we verify
+            the server's TLS certificate, or a string, in which case it must be a path
+            to a CA bundle to use. Defaults to ``True``.
+          cert_ssl (optional):
+            If String, path to ssl client cert file (.pem).
+            If Tuple, ('cert', 'key') pair.
         """
 
         # check to see if the library is running on a Google App Engine instance
@@ -248,6 +257,8 @@ class Api(object):
         self.sleep_on_rate_limit = sleep_on_rate_limit
         self.tweet_mode = tweet_mode
         self.proxies = proxies
+        self.verify_ssl = verify_ssl
+        self.cert_ssl = cert_ssl
 
         self.base_url = base_url or 'https://api.twitter.com/1.1'
         self.base_url_v2 = base_url_v2 or 'https://api.twitter.com/2'
@@ -1285,6 +1296,10 @@ class Api(object):
         parameters['media_type'] = media_type
         parameters['total_bytes'] = file_size
 
+        # Without this GIF files over 5MB but less than 15MB will fail uploading.
+        if media_type == 'image/gif' and file_size > 5242880:
+          parameters['media_category'] = 'tweet_gif'
+
         resp = self._RequestUrl(url, 'POST', data=parameters)
         data = self._ParseAndCheckTwitter(resp.content.decode('utf-8'))
 
@@ -1411,7 +1426,7 @@ class Api(object):
         Returns:
             media_id:
                 ID of the uploaded media returned by the Twitter API. Raises if
-                unsuccesful.
+                unsuccessful.
         """
 
         media_id, media_fp, filename = self._UploadMediaChunkedInit(media=media,
@@ -1728,14 +1743,14 @@ class Api(object):
                                     exclude_replies=False, include_rts=False)
 
     def GetRetweets(self,
-                    statusid,
+                    status_id,
                     count=None,
                     trim_user=False):
         """Returns up to 100 of the first retweets of the tweet identified
-        by statusid
+        by status_id
 
         Args:
-          statusid (int):
+          status_id (int):
             The ID of the tweet for which retweets should be searched for
           count (int, optional):
             The number of status messages to retrieve.
@@ -1744,9 +1759,9 @@ class Api(object):
             otherwise the payload will contain the full user data item.
 
         Returns:
-          A list of twitter.Status instances, which are retweets of statusid
+          A list of twitter.Status instances, which are retweets of status_id
         """
-        url = '%s/statuses/retweets/%s.json' % (self.base_url, statusid)
+        url = '%s/statuses/retweets/%s.json' % (self.base_url, status_id)
         parameters = {
             'trim_user': enf_type('trim_user', bool, trim_user),
         }
@@ -3370,11 +3385,11 @@ class Api(object):
         """Returns information about the relationship between the two users.
 
         Args:
-          source_id:
+          source_user_id:
             The user_id of the subject user [Optional]
           source_screen_name:
             The screen_name of the subject user [Optional]
-          target_id:
+          target_user_id:
             The user_id of the target user [Optional]
           target_screen_name:
             The screen_name of the target user [Optional]
@@ -4313,10 +4328,10 @@ class Api(object):
             user_timeline. Helpful for disambiguating when a valid screen
             name is also a user ID.
           skip_status (bool, optional):
-            If True the statuses will not be returned in the user items.
+            If True the statuses will not be returned in the user items. Defaults to False.
           include_entities (bool, optional):
             If False, the timeline will not contain additional metadata.
-            Defaults to True.
+            Defaults to False.
 
         Returns:
           list: A sequence of twitter.user.User instances, one for each
@@ -4335,7 +4350,7 @@ class Api(object):
                 include_entities=include_entities)
             result += users
 
-            if next_cursor == 0 or next_cursor == previous_cursor:
+            if next_cursor == 0:
                 break
             else:
                 cursor = next_cursor
@@ -4522,7 +4537,8 @@ class Api(object):
 
     def GetLists(self,
                  user_id=None,
-                 screen_name=None):
+                 screen_name=None,
+                 count=20):
         """Fetch the sequence of lists for a user. If no user_id or screen_name
         is passed, the data returned will be for the authenticated user.
 
@@ -4534,6 +4550,8 @@ class Api(object):
             for. [Optional]
           count:
             The amount of results to return per page.
+            Consider bumping this up if you are getting rate limit issues
+            with GetLists(), generally at > 15 * 20 = 300 lists.
             No more than 1000 results will ever be returned in a single page.
             Defaults to 20. [Optional]
           cursor:
@@ -4552,7 +4570,8 @@ class Api(object):
             next_cursor, prev_cursor, lists = self.GetListsPaged(
                 user_id=user_id,
                 screen_name=screen_name,
-                cursor=cursor)
+                cursor=cursor,
+                count=count)
             result += lists
             if next_cursor == 0 or next_cursor == prev_cursor:
                 break
@@ -4855,6 +4874,12 @@ class Api(object):
             elif include_keepalive:
                 yield None
 
+    def GetPlace(self, id):
+        url = '{}/geo/id/{}.json'.format(self.base_url, id)
+        resp = self._RequestUrl(url, 'GET')
+        data = self._ParseAndCheckTwitter(resp.content.decode('utf-8'))
+        return Place.NewFromJsonDict(data)
+
     def VerifyCredentials(self, include_entities=None, skip_status=None, include_email=None):
         """Returns a twitter.User instance if the authenticating user is valid.
 
@@ -4887,6 +4912,32 @@ class Api(object):
         data = self._ParseAndCheckTwitter(resp.content.decode('utf-8'))
 
         return User.NewFromJsonDict(data)
+
+    def ReplyTo(self, status, in_reply_to_status_id, **kwargs):
+        """Relay to a status. Automatically add @username before the status for 
+        convenience.This method calls api.GetStatus to get username.
+        
+
+        Args:
+            status (str):
+                The message text to be replyed.Must be less than or equal to 140 characters.
+            in_reply_to_status_id (int):
+                The ID of an existing status that the status to be posted is in reply to.
+            **kwargs:
+                The other args api.PostUpadtes need.
+
+        Returns:
+            (twitter.Status) A twitter.Status instance representing the message replied.
+        """
+        reply_status = self.GetStatus(in_reply_to_status_id)
+        u_status = "@%s " % reply_status.user.screen_name
+        if isinstance(status, str) or self._input_encoding is None:
+            u_status = u_status + status
+        else:
+            u_status = u_status + str(u_status, self._input_encoding)
+
+        return self.PostUpdate(u_status, in_reply_to_status_id=in_reply_to_status_id, **kwargs)
+
 
     def SetCache(self, cache):
         """Override the default cache.  Set to None to prevent caching.
@@ -5091,7 +5142,7 @@ class Api(object):
                 raise TwitterError({'message': "Exceeded connection limit for user"})
             if "Error 401 Unauthorized" in json_data:
                 raise TwitterError({'message': "Unauthorized"})
-            raise TwitterError({'Unknown error': '{0}'.format(json_data)})
+            raise TwitterError({'message': 'Unknown error': '{0}'.format(json_data)})
         self._CheckForTwitterError(data)
         return data
 
@@ -5124,7 +5175,9 @@ class Api(object):
                 data=data,
                 auth=self.__auth,
                 timeout=self._timeout,
-                proxies=self.proxies
+                proxies=self.proxies,
+                verify=self.verify_ssl,
+                cert=self.cert_ssl
             )
         except requests.RequestException as e:
             raise TwitterError(str(e))
@@ -5161,24 +5214,25 @@ class Api(object):
         if not data:
             data = {}
 
+        data['tweet_mode'] = self.tweet_mode
+
         if verb == 'POST':
             if data:
                 if 'media_ids' in data:
                     url = self._BuildUrl(url, extra_params={'media_ids': data['media_ids']})
-                    resp = self._session.post(url, data=data, auth=self.__auth, timeout=self._timeout, proxies=self.proxies)
+                    resp = self._session.post(url, data=data, auth=self.__auth, timeout=self._timeout, proxies=self.proxies, verify=self.verify_ssl, cert=self.cert_ssl)
                 elif 'media' in data:
-                    resp = self._session.post(url, files=data, auth=self.__auth, timeout=self._timeout, proxies=self.proxies)
+                    resp = self._session.post(url, files=data, auth=self.__auth, timeout=self._timeout, proxies=self.proxies, verify=self.verify_ssl, cert=self.cert_ssl)
                 else:
-                    resp = self._session.post(url, data=data, auth=self.__auth, timeout=self._timeout, proxies=self.proxies)
+                    resp = self._session.post(url, data=data, auth=self.__auth, timeout=self._timeout, proxies=self.proxies, verify=self.verify_ssl, cert=self.cert_ssl)
             elif json:
-                resp = self._session.post(url, json=json, auth=self.__auth, timeout=self._timeout, proxies=self.proxies)
+                resp = self._session.post(url, json=json, auth=self.__auth, timeout=self._timeout, proxies=self.proxies, verify=self.verify_ssl, cert=self.cert_ssl)
             else:
                 resp = 0  # POST request, but without data or json
 
         elif verb == 'GET':
-            data['tweet_mode'] = self.tweet_mode
             url = self._BuildUrl(url, extra_params=data)
-            resp = self._session.get(url, auth=self.__auth, timeout=self._timeout, proxies=self.proxies)
+            resp = self._session.get(url, auth=self.__auth, timeout=self._timeout, proxies=self.proxies, verify=self.verify_ssl, cert=self.cert_ssl)
 
         else:
             resp = 0  # if not a POST or GET request
@@ -5213,14 +5267,17 @@ class Api(object):
                 return session.post(url, data=data, stream=True,
                                     auth=self.__auth,
                                     timeout=self._timeout,
-                                    proxies=self.proxies)
+                                    proxies=self.proxies,
+                                    verify=self.verify_ssl,
+                                    cert=self.cert_ssl)
             except requests.RequestException as e:
                 raise TwitterError(str(e))
         if verb == 'GET':
             url = self._BuildUrl(url, extra_params=data)
             try:
                 return session.get(url, stream=True, auth=self.__auth,
-                                   timeout=self._timeout, proxies=self.proxies)
+                                   timeout=self._timeout, proxies=self.proxies,
+                                   verify=self.verify_ssl, cert=self.cert_ssl)
             except requests.RequestException as e:
                 raise TwitterError(str(e))
         return 0  # if not a POST or GET request
