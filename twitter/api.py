@@ -535,6 +535,107 @@ class Api(object):
         else:
             return [Status.NewFromJsonDict(x) for x in data.get('statuses', '')]
 
+    def GetSearchPublic(self,
+                          term=None,
+                          raw_query=None,
+                          until=None,
+                          since=None,
+                          min_replies=None,
+                          min_faves=None,
+                          min_retweets=None,
+                          count=20,
+                          lang=None,
+                          include_entities=None,
+                          include_user_entities=None,
+                          return_json=False):
+        """Return twitter search results for a given term. You must specify one
+        of term, geocode, or raw_query.
+
+        Args:
+          term (str, optional):
+            Term to search by. Optional if you include raw_query.
+          raw_query (str, optional):
+            A raw query as a string. This should be everything after the "?" in
+            the URL (i.e., the query parameters). You are responsible for all
+            type checking and ensuring that the query string is properly
+            formatted, as it will only be URL-encoded before be passed directly
+            to Twitter with no other checks performed. For advanced usage only.
+            *This will override any other parameters passed*
+          until (str, optional):
+            Returns tweets generated before the given date. Date should be
+            formatted as YYYY-MM-DD.
+          since (str, optional):
+            Returns tweets generated since the given date. Date should be
+            formatted as YYYY-MM-DD.
+          min_replies (int, optional):
+            Result tweets must have that numbmer or more replies.
+          min_faves (int, optional):
+            Result tweets must have that numbmer or more favourites.
+          min_retweets (int, optional):
+            Result tweets must have that numbmer or more retweets.
+          count (int, optional):
+            Number of results to return.  Default is 15 and maximum that
+            Twitter returns is 100 irrespective of what you type in.
+          lang (str, optional):
+            Language for results as ISO 639-1 code.  Default is None
+            (all languages).
+          include_entities (bool, optional):
+            If True, each tweet will include a node called "entities".
+            This node offers a variety of metadata about the tweet in a
+            discrete structure, including: user_mentions, urls, and
+            hashtags.
+          include_user_entities (bool, optional):
+            If True, each user will include a node called "entities".
+            This node offers a variety of metadata about the user in a
+            discrete structure, including: urls, and
+            hashtags.
+          return_json (bool, optional):
+            If True JSON data will be returned.
+        Returns:
+          list: A sequence of twitter.Status or twitter.User instances, one for each message
+          containing the term or given by the raw_query.
+        """
+        url = '%s/search/adaptive.json' % self.base_url_v2
+
+        if raw_query is not None:
+            url = "{url}?{raw_query}".format(
+                url=url,
+                raw_query=raw_query)
+            resp = self._RequestUrl(url, 'GET')
+        elif term is not None:
+            q_params = [term]
+
+            for param in ('min_replies', 'min_faves', 'min_retweets'):
+                if locals()[param]:
+                    q_params.append('%s:%d' % (param, enf_type(param, int, locals()[param])))
+
+            for param in ('lang', 'until', 'since'):
+                if locals()[param]:
+                    q_params.append('%s:%s' % (param, enf_type(param, str, locals()[param])))
+
+            parameters = {'q': ' '.join(q_params)}
+
+            if include_entities:
+                parameters['include_entities'] = enf_type('include_entities',
+                                                          bool,
+                                                          include_entities)
+            if include_user_entities:
+                parameters['include_user_entities'] = enf_type('include_user_entities',
+                                                          bool,
+                                                          include_user_entities)
+            parameters['count'] = enf_type('count', int, count)
+
+            resp = self._RequestUrl(url, 'GET', data=parameters)
+        else:
+            return []
+
+        data = self._ParseAndCheckTwitter(resp.content.decode('utf-8'))
+
+        if return_json:
+            return data
+        else:
+            return [Status.NewFromJsonDict(x) for _, x in data.get('globalObjects', {}).get('tweets', {}).items()]
+
     def GetUsersSearch(self,
                        term=None,
                        page=1,

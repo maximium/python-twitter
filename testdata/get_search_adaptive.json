@@ -1,0 +1,955 @@
+{
+  "globalObjects": {
+    "tweets": {
+      "1521067027032588289": {
+        "created_at": "Mon May 02 10:00:13 +0000 2022",
+        "id": 1521067027032588289,
+        "id_str": "1521067027032588289",
+        "full_text": "🌟明日よる放送！#星新一ドラマ🌟\n\n『#善良な市民同盟』前編\n小さい頃から手癖の悪かった悪徳不動産会社のセールスマン。その運命が「善良な市民同盟」という謎の組織との出会いで大きく動き出す…\n\n【#星新一の不思議な不思議な短編ドラマ】5/3(火)夜9:45[BSP/BS4K]\nhttps://t.co/pAdkMQRWkh https://t.co/xXXu9mrQ5X",
+        "truncated": false,
+        "display_text_range": [
+          0,
+          161
+        ],
+        "entities": {
+          "hashtags": [
+            {
+              "text": "星新一ドラマ",
+              "indices": [
+                8,
+                15
+              ]
+            },
+            {
+              "text": "善良な市民同盟",
+              "indices": [
+                19,
+                27
+              ]
+            },
+            {
+              "text": "星新一の不思議な不思議な短編ドラマ",
+              "indices": [
+                97,
+                115
+              ]
+            }
+          ],
+          "symbols": [],
+          "user_mentions": [],
+          "urls": [
+            {
+              "url": "https://t.co/pAdkMQRWkh",
+              "expanded_url": "https://www.nhk.jp/p/ts/MKP974JQRN/episode/te/GLQQYPGKVN/?cid=dchk-tw-dramas-220502-1900",
+              "display_url": "nhk.jp/p/ts/MKP974JQR…",
+              "indices": [
+                138,
+                161
+              ]
+            }
+          ],
+          "media": [
+            {
+              "id": 1521066974775853058,
+              "id_str": "1521066974775853058",
+              "indices": [
+                162,
+                185
+              ],
+              "media_url": "http://pbs.twimg.com/media/FRvqZbOWQAAL8Pb.jpg",
+              "media_url_https": "https://pbs.twimg.com/media/FRvqZbOWQAAL8Pb.jpg",
+              "url": "https://t.co/xXXu9mrQ5X",
+              "display_url": "pic.twitter.com/xXXu9mrQ5X",
+              "expanded_url": "https://twitter.com/nhk_dramas/status/1521067027032588289/video/1",
+              "type": "photo",
+              "original_info": {
+                "width": 1920,
+                "height": 1080
+              },
+              "sizes": {
+                "thumb": {
+                  "w": 150,
+                  "h": 150,
+                  "resize": "crop"
+                },
+                "large": {
+                  "w": 1920,
+                  "h": 1080,
+                  "resize": "fit"
+                },
+                "medium": {
+                  "w": 1200,
+                  "h": 675,
+                  "resize": "fit"
+                },
+                "small": {
+                  "w": 680,
+                  "h": 383,
+                  "resize": "fit"
+                }
+              }
+            }
+          ]
+        },
+        "extended_entities": {
+          "media": [
+            {
+              "id": 1521066974775853058,
+              "id_str": "1521066974775853058",
+              "indices": [
+                162,
+                185
+              ],
+              "media_url": "http://pbs.twimg.com/media/FRvqZbOWQAAL8Pb.jpg",
+              "media_url_https": "https://pbs.twimg.com/media/FRvqZbOWQAAL8Pb.jpg",
+              "url": "https://t.co/xXXu9mrQ5X",
+              "display_url": "pic.twitter.com/xXXu9mrQ5X",
+              "expanded_url": "https://twitter.com/nhk_dramas/status/1521067027032588289/video/1",
+              "type": "video",
+              "original_info": {
+                "width": 1920,
+                "height": 1080
+              },
+              "sizes": {
+                "thumb": {
+                  "w": 150,
+                  "h": 150,
+                  "resize": "crop"
+                },
+                "large": {
+                  "w": 1920,
+                  "h": 1080,
+                  "resize": "fit"
+                },
+                "medium": {
+                  "w": 1200,
+                  "h": 675,
+                  "resize": "fit"
+                },
+                "small": {
+                  "w": 680,
+                  "h": 383,
+                  "resize": "fit"
+                }
+              },
+              "video_info": {
+                "aspect_ratio": [
+                  16,
+                  9
+                ],
+                "duration_millis": 15000,
+                "variants": [
+                  {
+                    "bitrate": 832000,
+                    "content_type": "video/mp4",
+                    "url": "https://video.twimg.com/amplify_video/1521066974775853058/vid/640x360/qKkt-gz4N4nJefwY.mp4?tag=14"
+                  },
+                  {
+                    "content_type": "application/x-mpegURL",
+                    "url": "https://video.twimg.com/amplify_video/1521066974775853058/pl/k8_IlqQh2B7l7boP.m3u8?tag=14&container=fmp4"
+                  },
+                  {
+                    "bitrate": 2176000,
+                    "content_type": "video/mp4",
+                    "url": "https://video.twimg.com/amplify_video/1521066974775853058/vid/1280x720/XwCrlQuw8K_wFJ51.mp4?tag=14"
+                  },
+                  {
+                    "bitrate": 288000,
+                    "content_type": "video/mp4",
+                    "url": "https://video.twimg.com/amplify_video/1521066974775853058/vid/480x270/ib3jipKuNXr9QFZu.mp4?tag=14"
+                  }
+                ]
+              },
+              "media_key": "13_1521066974775853058",
+              "ext_media_availability": {
+                "status": "available"
+              },
+              "ext_alt_text": null,
+              "ext": {
+                "mediaStats": {
+                  "r": {
+                    "ok": {
+                      "viewCount": "13305"
+                    }
+                  },
+                  "ttl": -1
+                }
+              },
+              "additional_media_info": {
+                "title": "星新一ドラマ『善良な市民同盟』前編 5/3(火)夜9:45[BSP/BS4K]",
+                "description": "",
+                "monetizable": false
+              }
+            }
+          ]
+        },
+        "source": "<a href=\"https://www.sprinklr.com\" rel=\"nofollow\">Sprinklr</a>",
+        "in_reply_to_status_id": null,
+        "in_reply_to_status_id_str": null,
+        "in_reply_to_user_id": null,
+        "in_reply_to_user_id_str": null,
+        "in_reply_to_screen_name": null,
+        "user_id": 161979501,
+        "user_id_str": "161979501",
+        "geo": null,
+        "coordinates": null,
+        "place": null,
+        "contributors": null,
+        "is_quote_status": false,
+        "retweet_count": 762,
+        "favorite_count": 1256,
+        "reply_count": 6,
+        "quote_count": 19,
+        "conversation_id": 1521067027032588289,
+        "conversation_id_str": "1521067027032588289",
+        "favorited": false,
+        "retweeted": false,
+        "possibly_sensitive": false,
+        "possibly_sensitive_editable": true,
+        "lang": "ja",
+        "supplemental_language": null,
+        "self_thread": {
+          "id": 1521067027032588289,
+          "id_str": "1521067027032588289"
+        }
+      },
+      "1521074965940178945": {
+        "created_at": "Mon May 02 10:31:46 +0000 2022",
+        "id": 1521074965940178945,
+        "id_str": "1521074965940178945",
+        "full_text": "RT @nhk_dramas: 🌟#星新一ドラマ🌟\n明日よるの放送を前に、\n主演・北山宏光さんの\nインタビュー動画公開！\n\n【#星新一の不思議な不思議な短編ドラマ】『#善良な市民同盟』前編 5/3(火)夜9:45[BSP/BS4K]\n#北山宏光(Kis-My-Ft2) #玉城テ…",
+        "truncated": false,
+        "display_text_range": [
+          0,
+          140
+        ],
+        "entities": {
+          "hashtags": [
+            {
+              "text": "星新一ドラマ",
+              "indices": [
+                17,
+                24
+              ]
+            },
+            {
+              "text": "星新一の不思議な不思議な短編ドラマ",
+              "indices": [
+                63,
+                81
+              ]
+            },
+            {
+              "text": "善良な市民同盟",
+              "indices": [
+                83,
+                91
+              ]
+            },
+            {
+              "text": "北山宏光",
+              "indices": [
+                117,
+                122
+              ]
+            }
+          ],
+          "symbols": [],
+          "user_mentions": [
+            {
+              "screen_name": "nhk_dramas",
+              "name": "ＮＨＫドラマ",
+              "id": 161979501,
+              "id_str": "161979501",
+              "indices": [
+                3,
+                14
+              ]
+            }
+          ],
+          "urls": []
+        },
+        "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+        "in_reply_to_status_id": null,
+        "in_reply_to_status_id_str": null,
+        "in_reply_to_user_id": null,
+        "in_reply_to_user_id_str": null,
+        "in_reply_to_screen_name": null,
+        "user_id": 1096437986059677696,
+        "user_id_str": "1096437986059677696",
+        "geo": null,
+        "coordinates": null,
+        "place": null,
+        "contributors": null,
+        "retweeted_status_id": 1521067158846980096,
+        "retweeted_status_id_str": "1521067158846980096",
+        "is_quote_status": false,
+        "retweet_count": 885,
+        "favorite_count": 0,
+        "reply_count": 0,
+        "quote_count": 0,
+        "conversation_id": 1521074965940178945,
+        "conversation_id_str": "1521074965940178945",
+        "favorited": false,
+        "retweeted": false,
+        "lang": "ja",
+        "supplemental_language": null
+      },
+      "1521104258137214976": {
+        "created_at": "Mon May 02 12:28:10 +0000 2022",
+        "id": 1521104258137214976,
+        "id_str": "1521104258137214976",
+        "full_text": "@Shinobu_ninnin_ 度々申し訳ないです。\nこちらがおまけのメタルカードコレクションガムの忍くん3枚です🙇🏻‍♀️\n硬質ケースに入れてお送り致します🙌 https://t.co/22hoN6kC4F",
+        "truncated": false,
+        "display_text_range": [
+          17,
+          81
+        ],
+        "entities": {
+          "hashtags": [],
+          "symbols": [],
+          "user_mentions": [
+            {
+              "screen_name": "Shinobu_ninnin_",
+              "name": "yu✧ka",
+              "id": 1399281367234486274,
+              "id_str": "1399281367234486274",
+              "indices": [
+                0,
+                16
+              ]
+            }
+          ],
+          "urls": [],
+          "media": [
+            {
+              "id": 1521104255415123969,
+              "id_str": "1521104255415123969",
+              "indices": [
+                82,
+                105
+              ],
+              "media_url": "http://pbs.twimg.com/media/FRwMQtpagAEHlg-.jpg",
+              "media_url_https": "https://pbs.twimg.com/media/FRwMQtpagAEHlg-.jpg",
+              "url": "https://t.co/22hoN6kC4F",
+              "display_url": "pic.twitter.com/22hoN6kC4F",
+              "expanded_url": "https://twitter.com/2ln7juXxxq13jm0/status/1521104258137214976/photo/1",
+              "type": "photo",
+              "original_info": {
+                "width": 1080,
+                "height": 1080,
+                "focus_rects": [
+                  {
+                    "x": 0,
+                    "y": 49,
+                    "h": 605,
+                    "w": 1080
+                  },
+                  {
+                    "x": 0,
+                    "y": 0,
+                    "h": 1080,
+                    "w": 1080
+                  },
+                  {
+                    "x": 0,
+                    "y": 0,
+                    "h": 1080,
+                    "w": 947
+                  },
+                  {
+                    "x": 0,
+                    "y": 0,
+                    "h": 1080,
+                    "w": 540
+                  },
+                  {
+                    "x": 0,
+                    "y": 0,
+                    "h": 1080,
+                    "w": 1080
+                  }
+                ]
+              },
+              "sizes": {
+                "thumb": {
+                  "w": 150,
+                  "h": 150,
+                  "resize": "crop"
+                },
+                "large": {
+                  "w": 1080,
+                  "h": 1080,
+                  "resize": "fit"
+                },
+                "small": {
+                  "w": 680,
+                  "h": 680,
+                  "resize": "fit"
+                },
+                "medium": {
+                  "w": 1080,
+                  "h": 1080,
+                  "resize": "fit"
+                }
+              }
+            }
+          ]
+        },
+        "extended_entities": {
+          "media": [
+            {
+              "id": 1521104255415123969,
+              "id_str": "1521104255415123969",
+              "indices": [
+                82,
+                105
+              ],
+              "media_url": "http://pbs.twimg.com/media/FRwMQtpagAEHlg-.jpg",
+              "media_url_https": "https://pbs.twimg.com/media/FRwMQtpagAEHlg-.jpg",
+              "url": "https://t.co/22hoN6kC4F",
+              "display_url": "pic.twitter.com/22hoN6kC4F",
+              "expanded_url": "https://twitter.com/2ln7juXxxq13jm0/status/1521104258137214976/photo/1",
+              "type": "photo",
+              "original_info": {
+                "width": 1080,
+                "height": 1080,
+                "focus_rects": [
+                  {
+                    "x": 0,
+                    "y": 49,
+                    "h": 605,
+                    "w": 1080
+                  },
+                  {
+                    "x": 0,
+                    "y": 0,
+                    "h": 1080,
+                    "w": 1080
+                  },
+                  {
+                    "x": 0,
+                    "y": 0,
+                    "h": 1080,
+                    "w": 947
+                  },
+                  {
+                    "x": 0,
+                    "y": 0,
+                    "h": 1080,
+                    "w": 540
+                  },
+                  {
+                    "x": 0,
+                    "y": 0,
+                    "h": 1080,
+                    "w": 1080
+                  }
+                ]
+              },
+              "sizes": {
+                "thumb": {
+                  "w": 150,
+                  "h": 150,
+                  "resize": "crop"
+                },
+                "large": {
+                  "w": 1080,
+                  "h": 1080,
+                  "resize": "fit"
+                },
+                "small": {
+                  "w": 680,
+                  "h": 680,
+                  "resize": "fit"
+                },
+                "medium": {
+                  "w": 1080,
+                  "h": 1080,
+                  "resize": "fit"
+                }
+              },
+              "media_key": "3_1521104255415123969",
+              "ext_media_availability": {
+                "status": "available"
+              },
+              "ext_alt_text": null,
+              "ext": {
+                "mediaStats": {
+                  "r": "Missing",
+                  "ttl": -1
+                }
+              }
+            }
+          ]
+        },
+        "source": "<a href=\"http://twitter.com/download/android\" rel=\"nofollow\">Twitter for Android</a>",
+        "in_reply_to_status_id": 1521097798254755840,
+        "in_reply_to_status_id_str": "1521097798254755840",
+        "in_reply_to_user_id": 1399281367234486274,
+        "in_reply_to_user_id_str": "1399281367234486274",
+        "in_reply_to_screen_name": "Shinobu_ninnin_",
+        "user_id": 1520689095517040640,
+        "user_id_str": "1520689095517040640",
+        "geo": null,
+        "coordinates": null,
+        "place": null,
+        "contributors": null,
+        "is_quote_status": false,
+        "retweet_count": 0,
+        "favorite_count": 0,
+        "reply_count": 0,
+        "quote_count": 0,
+        "conversation_id": 1521097798254755840,
+        "conversation_id_str": "1521097798254755840",
+        "favorited": false,
+        "retweeted": false,
+        "possibly_sensitive": false,
+        "possibly_sensitive_editable": true,
+        "lang": "ja",
+        "supplemental_language": null
+      }
+    },
+    "users": {
+      "1520689095517040640": {
+        "id": 1520689095517040640,
+        "id_str": "1520689095517040640",
+        "name": "マヨイの三つ編み",
+        "screen_name": "2ln7juXxxq13jm0",
+        "location": "",
+        "description": "礼瀬マヨイ／イデア･シュラウド 推してます\n\nグッズ交換してます！【求】礼瀬マヨイ\n⚠交換の際は普通郵便のみ⚠\n気楽にコメント･DMお願い致します🙇‍♀️\n\n⚠交換条件↓ ↓ ↓\n\n･住所送れる方\n･交換が終わるまでちゃんと連絡とれる方\n上記守ってくださる方のみ交換させて頂いてます。",
+        "url": null,
+        "entities": {
+          "description": {
+            "urls": []
+          }
+        },
+        "protected": false,
+        "followers_count": 0,
+        "fast_followers_count": 0,
+        "normal_followers_count": 0,
+        "friends_count": 2,
+        "listed_count": 0,
+        "created_at": "Sun May 01 08:58:36 +0000 2022",
+        "favourites_count": 2,
+        "utc_offset": null,
+        "time_zone": null,
+        "geo_enabled": false,
+        "verified": false,
+        "statuses_count": 3,
+        "media_count": 2,
+        "lang": null,
+        "contributors_enabled": false,
+        "is_translator": false,
+        "is_translation_enabled": false,
+        "profile_background_color": "F5F8FA",
+        "profile_background_image_url": null,
+        "profile_background_image_url_https": null,
+        "profile_background_tile": false,
+        "profile_image_url": "http://pbs.twimg.com/profile_images/1520691405756448769/AXGAQFtO_normal.jpg",
+        "profile_image_url_https": "https://pbs.twimg.com/profile_images/1520691405756448769/AXGAQFtO_normal.jpg",
+        "profile_banner_url": "https://pbs.twimg.com/profile_banners/1520689095517040640/1651412458",
+        "profile_image_extensions_media_availability": null,
+        "profile_image_extensions_alt_text": null,
+        "profile_image_extensions": {
+          "mediaStats": {
+            "r": {
+              "missing": null
+            },
+            "ttl": -1
+          }
+        },
+        "profile_banner_extensions_media_availability": null,
+        "profile_banner_extensions_alt_text": null,
+        "profile_banner_extensions": {
+          "mediaStats": {
+            "r": {
+              "missing": null
+            },
+            "ttl": -1
+          }
+        },
+        "profile_link_color": "1DA1F2",
+        "profile_sidebar_border_color": "C0DEED",
+        "profile_sidebar_fill_color": "DDEEF6",
+        "profile_text_color": "333333",
+        "profile_use_background_image": true,
+        "has_extended_profile": false,
+        "default_profile": true,
+        "default_profile_image": false,
+        "pinned_tweet_ids": [],
+        "pinned_tweet_ids_str": [],
+        "has_custom_timelines": false,
+        "following": null,
+        "follow_request_sent": null,
+        "notifications": null,
+        "advertiser_account_type": "none",
+        "advertiser_account_service_levels": [],
+        "business_profile_state": "none",
+        "translator_type": "none",
+        "withheld_in_countries": [],
+        "require_some_consent": false
+      },
+      "1096437986059677696": {
+        "id": 1096437986059677696,
+        "id_str": "1096437986059677696",
+        "name": "marie",
+        "screen_name": "m_xxxq17",
+        "location": "",
+        "description": "キスマイを応援するアカウント🛼 北山くん中心",
+        "url": null,
+        "entities": {
+          "description": {
+            "urls": []
+          }
+        },
+        "protected": false,
+        "followers_count": 92,
+        "fast_followers_count": 0,
+        "normal_followers_count": 92,
+        "friends_count": 64,
+        "listed_count": 0,
+        "created_at": "Fri Feb 15 15:56:01 +0000 2019",
+        "favourites_count": 1475,
+        "utc_offset": null,
+        "time_zone": null,
+        "geo_enabled": false,
+        "verified": false,
+        "statuses_count": 19022,
+        "media_count": 232,
+        "lang": null,
+        "contributors_enabled": false,
+        "is_translator": false,
+        "is_translation_enabled": false,
+        "profile_background_color": "F5F8FA",
+        "profile_background_image_url": null,
+        "profile_background_image_url_https": null,
+        "profile_background_tile": false,
+        "profile_image_url": "http://pbs.twimg.com/profile_images/1425474443380461572/Pr77nW-X_normal.jpg",
+        "profile_image_url_https": "https://pbs.twimg.com/profile_images/1425474443380461572/Pr77nW-X_normal.jpg",
+        "profile_banner_url": "https://pbs.twimg.com/profile_banners/1096437986059677696/1599698479",
+        "profile_image_extensions_media_availability": null,
+        "profile_image_extensions_alt_text": null,
+        "profile_image_extensions": {
+          "mediaStats": {
+            "r": {
+              "missing": null
+            },
+            "ttl": -1
+          }
+        },
+        "profile_banner_extensions_media_availability": null,
+        "profile_banner_extensions_alt_text": null,
+        "profile_banner_extensions": {
+          "mediaStats": {
+            "r": {
+              "missing": null
+            },
+            "ttl": -1
+          }
+        },
+        "profile_link_color": "1DA1F2",
+        "profile_sidebar_border_color": "C0DEED",
+        "profile_sidebar_fill_color": "DDEEF6",
+        "profile_text_color": "333333",
+        "profile_use_background_image": true,
+        "has_extended_profile": false,
+        "default_profile": true,
+        "default_profile_image": false,
+        "pinned_tweet_ids": [
+          1111247806574944257
+        ],
+        "pinned_tweet_ids_str": [
+          "1111247806574944257"
+        ],
+        "has_custom_timelines": false,
+        "following": null,
+        "follow_request_sent": null,
+        "notifications": null,
+        "advertiser_account_type": "none",
+        "advertiser_account_service_levels": [],
+        "business_profile_state": "none",
+        "translator_type": "none",
+        "withheld_in_countries": [],
+        "require_some_consent": false
+      },
+      "161979501": {
+        "id": 161979501,
+        "id_str": "161979501",
+        "name": "ＮＨＫドラマ",
+        "screen_name": "nhk_dramas",
+        "location": "東京都渋谷区神南2-2-1",
+        "description": "NHKドラマ公式アカウント。ドラマスタッフが番組の最新情報や裏話をお届けします✿\n\n▼利用規約はこちら→https://t.co/ATB7JOsci4 ▼ＮＨＫ公式ツイッターのフォローの考え方はこちら→ https://t.co/uFaPNVWO22",
+        "url": "https://t.co/4TlpRDaBoC",
+        "entities": {
+          "url": {
+            "urls": [
+              {
+                "url": "https://t.co/4TlpRDaBoC",
+                "expanded_url": "http://nhk.jp/drama",
+                "display_url": "nhk.jp/drama",
+                "indices": [
+                  0,
+                  23
+                ]
+              }
+            ]
+          },
+          "description": {
+            "urls": [
+              {
+                "url": "https://t.co/ATB7JOsci4",
+                "expanded_url": "http://nhk.jp/rules",
+                "display_url": "nhk.jp/rules",
+                "indices": [
+                  52,
+                  75
+                ]
+              },
+              {
+                "url": "https://t.co/uFaPNVWO22",
+                "expanded_url": "http://nhk.jp/tw_f",
+                "display_url": "nhk.jp/tw_f",
+                "indices": [
+                  102,
+                  125
+                ]
+              }
+            ]
+          }
+        },
+        "protected": false,
+        "followers_count": 166971,
+        "fast_followers_count": 0,
+        "normal_followers_count": 166971,
+        "friends_count": 29,
+        "listed_count": 1980,
+        "created_at": "Fri Jul 02 08:19:07 +0000 2010",
+        "favourites_count": 2637,
+        "utc_offset": null,
+        "time_zone": null,
+        "geo_enabled": false,
+        "verified": true,
+        "statuses_count": 20952,
+        "media_count": 1606,
+        "lang": null,
+        "contributors_enabled": false,
+        "is_translator": false,
+        "is_translation_enabled": false,
+        "profile_background_color": "FF6699",
+        "profile_background_image_url": "http://abs.twimg.com/images/themes/theme11/bg.gif",
+        "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme11/bg.gif",
+        "profile_background_tile": true,
+        "profile_image_url": "http://pbs.twimg.com/profile_images/1109012778247811072/zWpQnOA-_normal.png",
+        "profile_image_url_https": "https://pbs.twimg.com/profile_images/1109012778247811072/zWpQnOA-_normal.png",
+        "profile_banner_url": "https://pbs.twimg.com/profile_banners/161979501/1648436707",
+        "profile_image_extensions_media_availability": null,
+        "profile_image_extensions_alt_text": null,
+        "profile_image_extensions": {
+          "mediaStats": {
+            "r": {
+              "missing": null
+            },
+            "ttl": -1
+          }
+        },
+        "profile_banner_extensions_media_availability": null,
+        "profile_banner_extensions_alt_text": null,
+        "profile_banner_extensions": {
+          "mediaStats": {
+            "r": {
+              "missing": null
+            },
+            "ttl": -1
+          }
+        },
+        "profile_link_color": "FBD75B",
+        "profile_sidebar_border_color": "CC3366",
+        "profile_sidebar_fill_color": "E5507E",
+        "profile_text_color": "362720",
+        "profile_use_background_image": true,
+        "has_extended_profile": false,
+        "default_profile": false,
+        "default_profile_image": false,
+        "pinned_tweet_ids": [],
+        "pinned_tweet_ids_str": [],
+        "has_custom_timelines": false,
+        "following": null,
+        "follow_request_sent": null,
+        "notifications": null,
+        "advertiser_account_type": "promotable_user",
+        "advertiser_account_service_levels": [
+          "dso",
+          "dso",
+          "dso",
+          "dso",
+          "mms",
+          "media_studio"
+        ],
+        "business_profile_state": "none",
+        "translator_type": "none",
+        "withheld_in_countries": [],
+        "require_some_consent": false
+      }
+    },
+    "moments": {},
+    "cards": {},
+    "places": {},
+    "media": {},
+    "broadcasts": {},
+    "topics": {},
+    "lists": {}
+  },
+  "timeline": {
+    "id": "search-6926894317269686494",
+    "instructions": [
+      {
+        "addEntries": {
+          "entries": [
+            {
+              "entryId": "sq-I-t-1521104258137214976",
+              "sortIndex": "999930",
+              "content": {
+                "item": {
+                  "content": {
+                    "tweet": {
+                      "id": "1521104258137214976",
+                      "displayType": "Tweet"
+                    }
+                  },
+                  "clientEventInfo": {
+                    "component": "result",
+                    "element": "tweet",
+                    "details": {
+                      "timelinesDetails": {
+                        "controllerData": "DAACDAAFDAABDAABDAABCgABAAAAAAAAAGAAAAwAAgoAAQAAAAAAAAABCgAC98jdvMN9MFQLAAMAAAAbaW5jbHVkZTpuYXRpdmVyZXR3ZWV0cyB4eHhxCgAFLn9IRFVqW7AAAAAAAA=="
+                      }
+                    }
+                  },
+                  "feedbackInfo": {
+                    "feedbackKeys": [
+                      "givefeedback"
+                    ],
+                    "displayContext": {
+                      "reason": "This Tweet's not helpful"
+                    },
+                    "clientEventInfo": {
+                      "component": "result",
+                      "element": "feedback_givefeedback",
+                      "action": "click"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "entryId": "sq-I-t-1521074965940178945",
+              "sortIndex": "999860",
+              "content": {
+                "item": {
+                  "content": {
+                    "tweet": {
+                      "id": "1521074965940178945",
+                      "displayType": "Tweet"
+                    }
+                  },
+                  "clientEventInfo": {
+                    "component": "result",
+                    "element": "tweet",
+                    "details": {
+                      "timelinesDetails": {
+                        "controllerData": "DAACDAAFDAABDAABDAABCgABAAAAAAAAAAAAAAwAAgoAAQAAAAAAAAABCgAC98jdvMN9MFQLAAMAAAAbaW5jbHVkZTpuYXRpdmVyZXR3ZWV0cyB4eHhxCgAFLn9IRFVqW7AAAAAAAA=="
+                      }
+                    }
+                  },
+                  "feedbackInfo": {
+                    "feedbackKeys": [
+                      "givefeedback"
+                    ],
+                    "displayContext": {
+                      "reason": "This Tweet's not helpful"
+                    },
+                    "clientEventInfo": {
+                      "component": "result",
+                      "element": "feedback_givefeedback",
+                      "action": "click"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "entryId": "sq-cursor-top",
+              "sortIndex": "999999999",
+              "content": {
+                "operation": {
+                  "cursor": {
+                    "value": "refresh:thGAVUV0VFVBaCgNDNlLPrmyoWgMDTxYfxjZwqEnEV8IV6FYCJehgHREVGQVVMVDUBFQAVAAA=",
+                    "cursorType": "Top"
+                  }
+                }
+              }
+            },
+            {
+              "entryId": "sq-cursor-bottom",
+              "sortIndex": "0",
+              "content": {
+                "operation": {
+                  "cursor": {
+                    "value": "scroll:thGAVUV0VFVBaCgNDNlLPrmyoWgMDTxYfxjZwqEnEV8IV6FYCJehgHREVGQVVMVDUBFQAVAAA=",
+                    "cursorType": "Bottom"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "responseObjects": {
+      "feedbackActions": {
+        "givefeedback": {
+          "feedbackType": "GiveFeedback",
+          "prompt": "This Tweet's not helpful",
+          "confirmation": "Thanks for offering your feedback. Twitter is conducting research to improve search. Choose the option that best reflects your opinion.",
+          "childKeys": [
+            "notrelevant",
+            "notcredible"
+          ],
+          "hasUndoAction": true,
+          "confirmationDisplayType": "Inline",
+          "clientEventInfo": {
+            "component": "result",
+            "element": "feedback_givefeedback",
+            "action": "click"
+          },
+          "icon": "FROWN"
+        },
+        "notrelevant": {
+          "feedbackType": "NotRelevant",
+          "prompt": "This Tweet isn't relevant",
+          "confirmation": "Thanks for your help.\nThis feedback will be used in research to improve search.",
+          "hasUndoAction": true,
+          "confirmationDisplayType": "Inline",
+          "clientEventInfo": {
+            "component": "result",
+            "element": "feedback_notrelevant",
+            "action": "click"
+          }
+        },
+        "notcredible": {
+          "feedbackType": "NotCredible",
+          "prompt": "This Tweet isn't credible",
+          "confirmation": "Thanks for your help.\nThis feedback will be used in research to improve search.",
+          "hasUndoAction": true,
+          "confirmationDisplayType": "Inline",
+          "clientEventInfo": {
+            "component": "result",
+            "element": "feedback_notcredible",
+            "action": "click"
+          }
+        }
+      }
+    }
+  }
+}
