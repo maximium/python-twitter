@@ -55,33 +55,33 @@ class ApiTest(unittest.TestCase):
         pass
 
     @responses.activate
-    def testGetSearchPublic(self):
+    def testGetSearchAdaptive(self):
         with open('testdata/get_search_adaptive.json') as f:
             resp_data = f.read()
         responses.add(GET, DEFAULT_URL, body=resp_data)
 
-        resp = self.api.GetSearchPublic(term='twitter', return_json=False)
+        resp = self.api.GetSearchAdaptive(term='twitter', return_json=False)
         self.assertEqual(len(resp), 3)
         self.assertTrue(type(resp[0]), twitter.Status)
         self.assertEqual(resp[0].id, 1521067027032588289)
         self.assertRaises(
             twitter.TwitterError,
-            lambda: self.api.GetSearchPublic(term='test', count='test'))
-        self.assertFalse(self.api.GetSearchPublic())
+            lambda: self.api.GetSearchAdaptive(term='test', count='test'))
+        self.assertFalse(self.api.GetSearchAdaptive())
 
     @responses.activate
-    def testGetSearchPublicResultFilterUser(self):
+    def testGetSearchAdaptiveResultFilterUser(self):
         with open('testdata/get_search_adaptive.json') as f:
             resp_data = f.read()
         responses.add(GET, DEFAULT_URL, body=resp_data)
 
-        resp = self.api.GetSearchPublic(term='twitter', result_filter='user')
+        resp = self.api.GetSearchAdaptive(term='twitter', result_filter='user')
         self.assertEqual(len(resp), 3)
         self.assertTrue(type(resp[0]), twitter.User)
         self.assertEqual(resp[0].id, 1520689095517040640)
 
     @responses.activate
-    def testGetSearchPublicQueryParameters(self):
+    def testGetSearchAdaptiveQueryParameters(self):
         with open('testdata/get_search_adaptive.json') as f:
             resp_data = f.read()
         responses.add(
@@ -93,7 +93,7 @@ class ApiTest(unittest.TestCase):
             }, strict_match=False)],
         )
 
-        self.api.GetSearchPublic(
+        self.api.GetSearchAdaptive(
             term='twitter',
             min_replies=1,
             min_faves=2,
@@ -104,7 +104,7 @@ class ApiTest(unittest.TestCase):
         )
 
     @responses.activate
-    def testGetSearchPublicResultFilter(self):
+    def testGetSearchAdaptiveResultFilter(self):
         with open('testdata/get_search_adaptive.json') as f:
             resp_data = f.read()
         responses.add(
@@ -114,17 +114,17 @@ class ApiTest(unittest.TestCase):
             match=[responses.matchers.query_param_matcher({'result_filter': 'image'}, strict_match=False)],
         )
 
-        self.api.GetSearchPublic(
+        self.api.GetSearchAdaptive(
             term='twitter',
             result_filter=twitter.SearchResultFilter.IMAGE,
         )
-        self.api.GetSearchPublic(
+        self.api.GetSearchAdaptive(
             term='twitter',
             result_filter='image',
         )
 
     @responses.activate
-    def testGetSearchPublicWrongResultFilter(self):
+    def testGetSearchAdaptiveWrongResultFilter(self):
         with open('testdata/get_search_adaptive.json') as f:
             resp_data = f.read()
         responses.add(
@@ -135,7 +135,7 @@ class ApiTest(unittest.TestCase):
 
         self.assertRaises(
             twitter.TwitterError,
-            lambda: self.api.GetSearchPublic(term='twitter', result_filter='wrongvalue')
+            lambda: self.api.GetSearchAdaptive(term='twitter', result_filter='wrongvalue')
         )
 
     @responses.activate
@@ -157,4 +157,4 @@ class ApiTest(unittest.TestCase):
             body=resp_data,
         )
 
-        self.api.GetSearchPublic(raw_query="q=twitter&count=100&result_filter=image", count=20)
+        self.api.GetSearchAdaptive(raw_query="q=twitter&count=100&result_filter=image", count=20)

@@ -536,7 +536,7 @@ class Api(object):
         else:
             return [Status.NewFromJsonDict(x) for x in data.get('statuses', '')]
 
-    def GetSearchPublic(self,
+    def GetSearchAdaptive(self,
                           term=None,
                           raw_query=None,
                           until=None,
