@@ -81,6 +81,16 @@ class ApiTest(unittest.TestCase):
         self.assertEqual(resp[0].id, 1520689095517040640)
 
     @responses.activate
+    def testGetSearchAdaptiveExpandUser(self):
+        with open('testdata/get_search_adaptive.json') as f:
+            resp_data = f.read()
+        responses.add(GET, DEFAULT_URL, body=resp_data)
+
+        resp = self.api.GetSearchAdaptive(term='twitter', expand_user=True)
+        self.assertTrue(type(resp[0].user), twitter.User)
+        self.assertEqual(resp[0].user.screen_name, 'nhk_dramas')
+
+    @responses.activate
     def testGetSearchAdaptiveQueryParameters(self):
         with open('testdata/get_search_adaptive.json') as f:
             resp_data = f.read()

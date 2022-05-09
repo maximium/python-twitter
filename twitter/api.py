@@ -549,6 +549,7 @@ class Api(object):
                           result_filter=None,
                           include_entities=False,
                           include_user_entities=False,
+                          expand_user=False,
                           return_json=False):
         """Return twitter search results for a given term. You must specify one
         of term, geocode, or raw_query.
@@ -593,6 +594,8 @@ class Api(object):
             This node offers a variety of metadata about the user in a
             discrete structure, including: urls, and
             hashtags.
+          expand_user (bool, optional):
+            Include user data in tweets.
           return_json (bool, optional):
             If True JSON data will be returned.
         Returns:
@@ -644,7 +647,13 @@ class Api(object):
             if result_filter == SearchResultFilter.USER.value:
                 return [User.NewFromJsonDict(x) for _, x in data.get('globalObjects', {}).get('users', {}).items()]
             else:
-                return [Status.NewFromJsonDict(x) for _, x in data.get('globalObjects', {}).get('tweets', {}).items()]
+                result = list(data.get('globalObjects', {}).get('tweets', {}).values())
+                if expand_user:
+                    users = data.get('globalObjects', {}).get('users', {})
+                    for i in range(len(result)):
+                        if result[i]['user_id_str'] in users:
+                            result[i]['user'] = users[result[i]['user_id_str']]
+                return [Status.NewFromJsonDict(x) for x in result]
 
     def GetUsersSearch(self,
                        term=None,
