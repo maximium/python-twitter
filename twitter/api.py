@@ -547,8 +547,8 @@ class Api(object):
                           count=20,
                           lang=None,
                           result_filter=None,
-                          include_entities=None,
-                          include_user_entities=None,
+                          include_entities=False,
+                          include_user_entities=False,
                           return_json=False):
         """Return twitter search results for a given term. You must specify one
         of term, geocode, or raw_query.
