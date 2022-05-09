@@ -50,6 +50,7 @@ from .models import (                       # noqa
     Url,                                    # noqa
     User,                                   # noqa
     UserStatus,                             # noqa
+    SearchResultFilter,                     # noqa
     Status                                  # noqa
 )
 

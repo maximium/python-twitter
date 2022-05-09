@@ -50,6 +50,7 @@ from twitter import (
     DirectMessage,
     List,
     Place,
+    SearchResultFilter,
     Status,
     Trend,
     User,
@@ -545,6 +546,7 @@ class Api(object):
                           min_retweets=None,
                           count=20,
                           lang=None,
+                          result_filter=None,
                           include_entities=None,
                           include_user_entities=None,
                           return_json=False):
@@ -579,6 +581,8 @@ class Api(object):
           lang (str, optional):
             Language for results as ISO 639-1 code.  Default is None
             (all languages).
+          result_filter (str, optional):
+            Filter results by type. Use twitter.models.SearchResultFilter as a value.
           include_entities (bool, optional):
             If True, each tweet will include a node called "entities".
             This node offers a variety of metadata about the tweet in a
@@ -615,6 +619,9 @@ class Api(object):
 
             parameters = {'q': ' '.join(q_params)}
 
+            if result_filter:
+                parameters['result_filter'] = enf_type('result_filter', SearchResultFilter, result_filter).value
+
             if include_entities:
                 parameters['include_entities'] = enf_type('include_entities',
                                                           bool,
@@ -634,7 +641,10 @@ class Api(object):
         if return_json:
             return data
         else:
-            return [Status.NewFromJsonDict(x) for _, x in data.get('globalObjects', {}).get('tweets', {}).items()]
+            if result_filter == SearchResultFilter.USER.value:
+                return [User.NewFromJsonDict(x) for _, x in data.get('globalObjects', {}).get('users', {}).items()]
+            else:
+                return [Status.NewFromJsonDict(x) for _, x in data.get('globalObjects', {}).get('tweets', {}).items()]
 
     def GetUsersSearch(self,
                        term=None,

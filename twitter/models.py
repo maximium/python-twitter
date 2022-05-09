@@ -9,6 +9,14 @@ try:
 except ImportError:
     from email.utils import parsedate
 
+from enum import Enum
+
+
+class SearchResultFilter(Enum):
+    IMAGE = 'image'
+    VIDEO = 'video'
+    USER = 'user'
+
 
 class TwitterModel(object):
 

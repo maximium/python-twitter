@@ -70,6 +70,17 @@ class ApiTest(unittest.TestCase):
         self.assertFalse(self.api.GetSearchPublic())
 
     @responses.activate
+    def testGetSearchPublicResultFilterUser(self):
+        with open('testdata/get_search_adaptive.json') as f:
+            resp_data = f.read()
+        responses.add(GET, DEFAULT_URL, body=resp_data)
+
+        resp = self.api.GetSearchPublic(term='twitter', result_filter='user')
+        self.assertEqual(len(resp), 3)
+        self.assertTrue(type(resp[0]), twitter.User)
+        self.assertEqual(resp[0].id, 1520689095517040640)
+
+    @responses.activate
     def testGetSearchPublicQueryParameters(self):
         with open('testdata/get_search_adaptive.json') as f:
             resp_data = f.read()
@@ -90,6 +101,41 @@ class ApiTest(unittest.TestCase):
             lang='en',
             until='2022-01-01',
             since='2006-06-01'
+        )
+
+    @responses.activate
+    def testGetSearchPublicResultFilter(self):
+        with open('testdata/get_search_adaptive.json') as f:
+            resp_data = f.read()
+        responses.add(
+            GET,
+            DEFAULT_URL,
+            body=resp_data,
+            match=[responses.matchers.query_param_matcher({'result_filter': 'image'}, strict_match=False)],
+        )
+
+        self.api.GetSearchPublic(
+            term='twitter',
+            result_filter=twitter.SearchResultFilter.IMAGE,
+        )
+        self.api.GetSearchPublic(
+            term='twitter',
+            result_filter='image',
+        )
+
+    @responses.activate
+    def testGetSearchPublicWrongResultFilter(self):
+        with open('testdata/get_search_adaptive.json') as f:
+            resp_data = f.read()
+        responses.add(
+            GET,
+            DEFAULT_URL,
+            body=resp_data,
+        )
+
+        self.assertRaises(
+            twitter.TwitterError,
+            lambda: self.api.GetSearchPublic(term='twitter', result_filter='wrongvalue')
         )
 
     @responses.activate
