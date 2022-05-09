@@ -645,7 +645,7 @@ class Api(object):
             return data
         else:
             if result_filter == SearchResultFilter.USER.value:
-                return [User.NewFromJsonDict(x) for _, x in data.get('globalObjects', {}).get('users', {}).items()]
+                return [User.NewFromJsonDict(x) for x in data.get('globalObjects', {}).get('users', {}).values()]
             else:
                 result = list(data.get('globalObjects', {}).get('tweets', {}).values())
                 if expand_user:
