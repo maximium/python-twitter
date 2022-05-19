@@ -10,6 +10,7 @@ except ImportError:
     from email.utils import parsedate
 
 from enum import Enum
+from twitter.twitter_utils import parse_cursors
 
 
 class SearchResultFilter(Enum):
@@ -556,8 +557,7 @@ class Place(TwitterModel):
             'country_code': None,
             'country': None,
             'bounding_box': None,
-            'attributes': None
-        }
+            'attributes': None}
 
         for (param, default) in self.param_defaults.items():
             setattr(self, param, kwargs.get(param, default))
@@ -573,3 +573,57 @@ class Place(TwitterModel):
         return "Place(ID={0}, Name={1}, Country={2})".format(self.id,
                                                              self.name,
                                                              self.country)
+
+
+class Timeline(TwitterModel):
+    """A class representing the twitter timeline structure.
+    """
+
+    def __init__(self, **kwargs):
+        self.param_defaults = {
+            'entries': [],
+            'next_cursor': None,
+            'previous_cursor': None,
+        }
+
+        for (param, default) in self.param_defaults.items():
+            setattr(self, param, kwargs.get(param, default))
+
+    @classmethod
+    def NewFromJsonDict(cls, data, **kwargs):
+        """ Create a new instance based on a JSON dict.
+
+        Args:
+            data: A JSON dict, as converted from the JSON in the twitter API.
+
+        Returns:
+            A twitter.Timeline instance
+        """
+
+        for instruction in data.get('timeline', {}).get('instructions', []):
+            if entries := instruction.get('addEntries', {}).get('entries', []):
+                break
+
+        entry_object_types = {
+            'tweet': ('tweets', Status),
+            'user': ('users', User),
+        }
+
+        result_entries = []
+        for entry in entries:
+            if item := entry.get('content', {}).get('item', {}).get('content', {}):
+                entry_type = list(item.keys())[0]
+                if entry_type in entry_object_types and \
+                  item[entry_type]['id'] in data['globalObjects'][entry_object_types[entry_type][0]]:
+                    result_entries.append(entry_object_types[entry_type][1].NewFromJsonDict(
+                        data['globalObjects'][entry_object_types[entry_type][0]][item[entry_type]['id']]
+                    ))
+
+        next_cursor, previous_cursor = parse_cursors(data)
+
+        return super(cls, cls).NewFromJsonDict(
+            data={},
+            entries=result_entries,
+            next_cursor=next_cursor,
+            previous_cursor=previous_cursor,
+        )

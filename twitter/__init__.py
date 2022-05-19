@@ -51,7 +51,8 @@ from .models import (                       # noqa
     User,                                   # noqa
     UserStatus,                             # noqa
     SearchResultFilter,                     # noqa
-    Status                                  # noqa
+    Status,                                 # noqa
+    Timeline,
 )
 
 from .api import Api                        # noqa

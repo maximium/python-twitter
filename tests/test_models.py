@@ -35,6 +35,8 @@ class ModelsTest(unittest.TestCase):
         USER_SAMPLE_JSON = json.loads(f.read().decode('utf8'))
     with open('testdata/models/models_user_status.json', 'rb') as f:
         USER_STATUS_SAMPLE_JSON = json.loads(f.read().decode('utf8'))
+    with open('testdata/models/models_timeline.json', 'rb') as f:
+        TIMELINE_SAMPLE_JSON = json.loads(f.read().decode('utf8'))
 
     def test_category(self):
         """ Test twitter.Category object """
@@ -172,3 +174,15 @@ class ModelsTest(unittest.TestCase):
         self.assertTrue(user_status.connections['blocking'])
         self.assertTrue(user_status.connections['muting'])
         self.assertFalse(user_status.connections['followed_by'])
+
+    def test_timeline(self):
+        """ Test twitter.Timeline object """
+        timeline = twitter.Timeline.NewFromJsonDict(self.TIMELINE_SAMPLE_JSON)
+
+        self.assertEqual(timeline.next_cursor, 'bottom_cursor_hash')
+        self.assertEqual(timeline.previous_cursor, 'top_cursor_hash')
+        self.assertEqual(len(timeline.entries), 2)
+        self.assertIsInstance(timeline.entries[0], twitter.User)
+        self.assertEqual(timeline.entries[0].id, 318346543)
+        self.assertIsInstance(timeline.entries[1], twitter.Status)
+        self.assertEqual(timeline.entries[1].id, 1526873975707803648)
