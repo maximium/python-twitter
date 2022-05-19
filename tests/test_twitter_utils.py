@@ -1,6 +1,7 @@
 # encoding: utf-8
 from __future__ import unicode_literals
 
+import json
 import sys
 import unittest
 
@@ -140,3 +141,33 @@ class ApiTest(unittest.TestCase):
         out = utils.parse_arg_list(users, 'screen_name')
         assert isinstance(out, (str, unicode))
         assert out == '__jcbl__'
+
+    def test_parse_cursors(self):
+        test_data = [
+            (
+                'parse_cursors_addentries',
+                'bottom_cursor_hash',
+                'top_cursor_hash',
+            ),
+            (
+                'parse_cursors_replaceentry',
+                'bottom_cursor_hash',
+                'top_cursor_hash',
+            ),
+        ]
+
+        for i in test_data:
+            with self.subTest():
+                with open('testdata/twitter_utils/%s.json' % i[0]) as f:
+                    api_data = json.loads(f.read())
+
+                next_cursor, previous_cursor = utils.parse_cursors(api_data)
+
+                self.assertEqual(next_cursor, i[1])
+                self.assertEqual(previous_cursor, i[2])
+
+    def test_parse_cursors_nodata(self):
+        next_cursor, previous_cursor = utils.parse_cursors({})
+
+        assert next_cursor is None
+        assert previous_cursor is None

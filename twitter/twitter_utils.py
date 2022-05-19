@@ -342,3 +342,33 @@ def parse_arg_list(args, attr):
             elif isinstance(item, twitter.User):
                 out.append(getattr(item, attr))
     return ",".join([str(item) for item in out])
+
+
+def parse_cursors(data):
+    """ Returns next_cursor, previous_cursor
+    """
+    def parse(iterable, result=[None, None]):
+        if isinstance(iterable, list):
+            # iterate list in reverse order because cursors are at the end of it
+            for item in reversed(iterable):
+                result = parse(item, result)
+                if None not in result:
+                    return result
+        elif isinstance(iterable, dict):
+            if cursor := iterable.get('operation', {}).get('cursor'):
+                if cursor['cursorType'].lower() == 'bottom':
+                    result[0] = cursor['value']
+                elif cursor['cursorType'].lower() == 'top':
+                    result[1] = cursor['value']
+                if None not in result:
+                    return result
+            else:
+                for key in iterable:
+                    result = parse(iterable[key], result)
+                    if None not in result:
+                        return result
+        return result
+
+    timeline_instructions = data.get('timeline', {}).get('instructions', [])
+    result = parse(timeline_instructions)
+    return result
