@@ -103,6 +103,22 @@ class ApiTest(unittest.TestCase):
         )
 
     @responses.activate
+    def testGetSearchAdaptiveCursorParameter(self):
+        with open('testdata/get_search_adaptive.json') as f:
+            resp_data = f.read()
+        responses.add(
+            GET,
+            DEFAULT_URL,
+            body=resp_data,
+            match=[responses.matchers.query_param_matcher({'cursor': 'cursorhash'}, strict_match=False)],
+        )
+
+        self.api.GetSearchAdaptive(
+            term='twitter',
+            cursor='cursorhash',
+        )
+
+    @responses.activate
     def testGetSearchAdaptiveResultFilter(self):
         with open('testdata/get_search_adaptive.json') as f:
             resp_data = f.read()

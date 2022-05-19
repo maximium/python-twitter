@@ -551,7 +551,8 @@ class Api(object):
                           include_entities=False,
                           include_user_entities=False,
                           expand_user=False,
-                          return_json=False):
+                          return_json=False,
+                          cursor=None):
         """Return twitter search results for a given term. You must specify one
         of term, geocode, or raw_query.
 
@@ -599,6 +600,8 @@ class Api(object):
             Include user data in tweets.
           return_json (bool, optional):
             If True JSON data will be returned.
+          cursor (str, optional):
+            Api pagination cursor.
         Returns:
           Timeline: A Timeline object with cursors and
           sequence of twitter.Status or twitter.User instances,
@@ -623,6 +626,9 @@ class Api(object):
                     q_params.append('%s:%s' % (param, enf_type(param, str, locals()[param])))
 
             parameters = {'q': ' '.join(q_params)}
+
+            if cursor:
+                parameters['cursor'] = enf_type('cursor', str, cursor)
 
             if result_filter:
                 parameters['result_filter'] = enf_type('result_filter', SearchResultFilter, result_filter).value
