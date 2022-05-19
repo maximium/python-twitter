@@ -879,6 +879,42 @@
               }
             },
             {
+              "entryId": "sq-I-t-1521067027032588289",
+              "sortIndex": "999860",
+              "content": {
+                "item": {
+                  "content": {
+                    "tweet": {
+                      "id": "1521067027032588289",
+                      "displayType": "Tweet"
+                    }
+                  },
+                  "clientEventInfo": {
+                    "component": "result",
+                    "element": "tweet",
+                    "details": {
+                      "timelinesDetails": {
+                        "controllerData": "DAACDAAFDAABDAABDAABCgABAAAAAAAAAAAAAAwAAgoAAQAAAAAAAAABCgAC98jdvMN9MFQLAAMAAAAbaW5jbHVkZTpuYXRpdmVyZXR3ZWV0cyB4eHhxCgAFLn9IRFVqW7AAAAAAAA=="
+                      }
+                    }
+                  },
+                  "feedbackInfo": {
+                    "feedbackKeys": [
+                      "givefeedback"
+                    ],
+                    "displayContext": {
+                      "reason": "This Tweet's not helpful"
+                    },
+                    "clientEventInfo": {
+                      "component": "result",
+                      "element": "feedback_givefeedback",
+                      "action": "click"
+                    }
+                  }
+                }
+              }
+            },
+            {
               "entryId": "sq-cursor-top",
               "sortIndex": "999999999",
               "content": {

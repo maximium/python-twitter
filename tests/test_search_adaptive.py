@@ -61,24 +61,13 @@ class ApiTest(unittest.TestCase):
         responses.add(GET, DEFAULT_URL, body=resp_data)
 
         resp = self.api.GetSearchAdaptive(term='twitter', return_json=False)
-        self.assertEqual(len(resp), 3)
-        self.assertTrue(type(resp[0]), twitter.Status)
-        self.assertEqual(resp[0].id, 1521067027032588289)
+        self.assertEqual(len(resp.entries), 3)
+        self.assertIsInstance(resp.entries[0], twitter.Status)
+        self.assertEqual(resp.entries[0].id, 1521104258137214976)
         self.assertRaises(
             twitter.TwitterError,
             lambda: self.api.GetSearchAdaptive(term='test', count='test'))
         self.assertFalse(self.api.GetSearchAdaptive())
-
-    @responses.activate
-    def testGetSearchAdaptiveResultFilterUser(self):
-        with open('testdata/get_search_adaptive.json') as f:
-            resp_data = f.read()
-        responses.add(GET, DEFAULT_URL, body=resp_data)
-
-        resp = self.api.GetSearchAdaptive(term='twitter', result_filter='user')
-        self.assertEqual(len(resp), 3)
-        self.assertTrue(type(resp[0]), twitter.User)
-        self.assertEqual(resp[0].id, 1520689095517040640)
 
     @responses.activate
     def testGetSearchAdaptiveExpandUser(self):
@@ -87,8 +76,8 @@ class ApiTest(unittest.TestCase):
         responses.add(GET, DEFAULT_URL, body=resp_data)
 
         resp = self.api.GetSearchAdaptive(term='twitter', expand_user=True)
-        self.assertTrue(type(resp[0].user), twitter.User)
-        self.assertEqual(resp[0].user.screen_name, 'nhk_dramas')
+        self.assertIsInstance(resp.entries[0].user, twitter.User)
+        self.assertEqual(resp.entries[0].user.screen_name, '2ln7juXxxq13jm0')
 
     @responses.activate
     def testGetSearchAdaptiveQueryParameters(self):

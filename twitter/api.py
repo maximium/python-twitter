@@ -52,6 +52,7 @@ from twitter import (
     Place,
     SearchResultFilter,
     Status,
+    Timeline,
     Trend,
     User,
     UserStatus,
@@ -599,8 +600,9 @@ class Api(object):
           return_json (bool, optional):
             If True JSON data will be returned.
         Returns:
-          list: A sequence of twitter.Status or twitter.User instances, one for each message
-          containing the term or given by the raw_query.
+          Timeline: A Timeline object with cursors and
+          sequence of twitter.Status or twitter.User instances,
+          one for each message containing the term or given by the raw_query.
         """
         url = '%s/search/adaptive.json' % self.base_url_v2
 
@@ -644,16 +646,14 @@ class Api(object):
         if return_json:
             return data
         else:
-            if result_filter == SearchResultFilter.USER.value:
-                return [User.NewFromJsonDict(x) for x in data.get('globalObjects', {}).get('users', {}).values()]
-            else:
-                result = list(data.get('globalObjects', {}).get('tweets', {}).values())
-                if expand_user:
-                    users = data.get('globalObjects', {}).get('users', {})
-                    for i in range(len(result)):
-                        if result[i]['user_id_str'] in users:
-                            result[i]['user'] = users[result[i]['user_id_str']]
-                return [Status.NewFromJsonDict(x) for x in result]
+            if expand_user and \
+              len(data.get('globalObjects', {}).get('tweets', {})) and \
+              len(data.get('globalObjects', {}).get('users', {})):
+                for status_id in data['globalObjects']['tweets']:
+                    user_id = data['globalObjects']['tweets'][status_id]['user_id_str']
+                    if user_id in data['globalObjects']['users']:
+                        data['globalObjects']['tweets'][status_id]['user'] = data['globalObjects']['users'][user_id]
+            return Timeline.NewFromJsonDict(data)
 
     def GetUsersSearch(self,
                        term=None,
