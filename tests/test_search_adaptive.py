@@ -39,8 +39,8 @@ class ApiTest(unittest.TestCase):
 
     def setUp(self):
         self.api = twitter.Api(
-            tweet_mode = 'extended',
-            base_url_v2 = 'https://api.twitter.com/2',
+            tweet_mode='extended',
+            base_url_v2='https://api.twitter.com/2',
             consumer_key='test',
             consumer_secret='test',
             access_token_key='test',
