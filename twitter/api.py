@@ -550,6 +550,11 @@ class Api(object):
                           result_filter=None,
                           include_entities=False,
                           include_user_entities=False,
+                          include_ext_alt_text=False,
+                          include_ext_media_availability=False,
+                          include_quote_count=False,
+                          include_reply_count=False,
+                          ext=None,
                           expand_user=False,
                           return_json=False,
                           cursor=None):
@@ -641,6 +646,26 @@ class Api(object):
                 parameters['include_user_entities'] = enf_type('include_user_entities',
                                                           bool,
                                                           include_user_entities)
+            if include_ext_alt_text:
+                parameters['include_ext_alt_text'] = enf_type('include_ext_alt_text',
+                                                          bool,
+                                                          include_ext_alt_text)
+            if include_ext_media_availability:
+                parameters['include_ext_media_availability'] = enf_type('include_ext_media_availability',
+                                                          bool,
+                                                          include_ext_media_availability)
+            if include_quote_count:
+                parameters['include_quote_count'] = enf_type('include_quote_count',
+                                                          bool,
+                                                          include_quote_count)
+            if include_reply_count:
+                parameters['include_reply_count'] = enf_type('include_reply_count',
+                                                          bool,
+                                                          include_reply_count)
+
+            if ext:
+                parameters['ext'] = enf_type('ext', str, ext)
+
             parameters['count'] = enf_type('count', int, count)
 
             resp = self._RequestUrl(url, 'GET', data=parameters)
